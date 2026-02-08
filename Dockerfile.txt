@@ -1,0 +1,19 @@
+# Python ka halka version use karenge
+FROM python:3.9-slim
+
+# FFmpeg install karein (Video merging ke liye zaruri hai)
+RUN apt-get update && \
+    apt-get install -y ffmpeg && \
+    rm -rf /var/lib/apt/lists/*
+
+# Kaam karne ki jagah set karein
+WORKDIR /app
+
+# Files copy karein
+COPY . .
+
+# Libraries install karein
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Bot start karein
+CMD ["python", "bot.py"]
